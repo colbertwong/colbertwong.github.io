@@ -17,6 +17,7 @@ date: 2020-02-11 20:38:51
 
 - 在github上的`username.github.io`仓库里创建hexo分支，并设置为默认分支。
 - 确保本地的博客根目录里有`.gitignore`文件(应该是自动生成的文件)，内容如下：
+
 ```
 .DS_Store
 Thumbs.db
@@ -26,7 +27,9 @@ node_modules/
 public/
 .deploy*/
 ```
+
 - 进入本地博客根目录，初始化仓库，切换分支，提交文件：
+
 ``` bash
 git init
 git add -A
