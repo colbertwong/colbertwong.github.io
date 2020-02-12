@@ -22,7 +22,7 @@ hexo new "hexo下的_post目录下的文件管理"
 INFO  Created: D:\work\hexo\source\_posts\2020\02\hexo下的-post目录下的文件管理.md
 ```
 
-另外，因为我没有安装文章汉字名转拼音的插件，为了避免成的文章的永久链接里出现汉字，所以也修改了`_config.yml`的`permalink`项目的值。
+另外，因为我没有安装文章汉字名转拼音的插件，为了避免文章的永久链接里出现汉字，所以也修改了`_config.yml`的`permalink`项目的值。
 
 ``` yml
 permalink: :year/:month/:day-:hour:minute.html
