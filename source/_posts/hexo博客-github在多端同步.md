@@ -41,5 +41,14 @@ git push origin hexo // 若发生‘ ! [rejected]        hexo -> hexo (fetch fir
 git push --force origin hexo // 若上一句没有错误，这句可以不用实行
 ```
 
-- 他终端上的操作（待补充）
+- 他终端上的操作
+   1. 正常安装node和git
+   2. 克隆hexo: `git clone git@github.com:colbertwong/colbertwong.github.io.git hexo`
+   3. 进入 hexo目录，执行 `npm install`
+   4. 全局安装hexo命令行：`npm install -g hexo-cli`
+
+
+以上
+   
+
 
