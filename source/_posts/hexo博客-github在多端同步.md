@@ -14,6 +14,7 @@ date: 2020-02-11 20:38:51
 
 - 思路
 仓库分两个分支：hexo和master。hexo作为默认分支，存放博客源代码，master分支存放博客生成页面。
+（hexo分支为日常作业分支；master分支由`hexo d`来更新）
 
 - 在github上的`username.github.io`仓库里创建hexo分支，并设置为默认分支。
 - 确保本地的博客根目录里有`.gitignore`文件(应该是自动生成的文件)，内容如下：
