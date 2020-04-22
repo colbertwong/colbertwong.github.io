@@ -4,8 +4,11 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="本地bootstrap4中文手册, 半岛愚人">
-    <meta name="description" content="本地bootstrap4中文手册今天有同事来问我，能不能帮忙找个 bootstrap4 的离线手册。因为之前下载过 bootstrap3 的离线手册并收藏了网址，就满口答应了下来。结果尴尬了，该网站并不提供 bootstrap4 的离线手册">
+    <meta name="keywords" content="vba的几个小memo, 半岛愚人">
+    <meta name="description" content="vba的几个小memo帮同事写了一个vba小工具。需求是将某目录下的一些excel表格的内容（CRUD），按照某个维度（画面ID）进行合并，输出在一个新excle表格中。用到了几个vba的小知识点，memo一下。
+
+文件夹下所有文件取得
+字">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -13,7 +16,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>本地bootstrap4中文手册 | 半岛愚人</title>
+    <title>vba的几个小memo | 半岛愚人</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -282,12 +285,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/11.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/16.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">本地bootstrap4中文手册</h1>
+                    <h1 class="description center-align post-title">vba的几个小memo</h1>
                 </div>
             </div>
         </div>
@@ -404,12 +407,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/%E5%89%8D%E7%AB%AF/">
-                                <span class="chip bg-color">前端</span>
-                            </a>
-                        
-                            <a href="/tags/bootstrap4/">
-                                <span class="chip bg-color">bootstrap4</span>
+                            <a href="/tags/vba/">
+                                <span class="chip bg-color">vba</span>
                             </a>
                         
                     </div>
@@ -433,7 +432,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-04-08
+                    2020-04-22
                 </div>
                 
 
@@ -450,10 +449,143 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="本地bootstrap4中文手册"><a href="#本地bootstrap4中文手册" class="headerlink" title="本地bootstrap4中文手册"></a>本地bootstrap4中文手册</h2><p>今天有同事来问我，能不能帮忙找个 <code>bootstrap4</code> 的离线手册。因为之前下载过 <code>bootstrap3</code> 的离线手册并收藏了<a href="https://www.bootcss.com/" target="_blank" rel="noopener">网址</a>，就满口答应了下来。结果尴尬了，该网站并不提供 <code>bootstrap4</code> 的离线手册，只有在线的。于是继续搜索，更尴尬的事情发生了，没找到。。。由于信息安全的要求，整个部门都是离线开发的，所以离线手册对我们来讲挺重要的。小学生守则教导我们，答应别人的事情要努力做到(其实是不能跌份儿啊)。于是曲线救国，在 <code>github</code> 上找到了 <code>bootstrap4</code> 的<a href="https://github.com/tmplink/bootstrap4_chinese" target="_blank" rel="noopener">中文手册翻译项目</a>， 读了一下readme，是支持在本地用一个web服务器让它跑起来的。</p>
-<p>下载工程，传到内网web服务器，解压，子目录方式访问<code>http://localhost/bootstrap4cn/index.html</code>，嗯？一片空白？赶快开发者模式看一下，访问 <code>index.html</code> 时， <code>http://localhost/config/pre.html?v=1586316257938</code> 找不到。url中缺少了子目录，调查了一下，该项目试用了一个叫 <code>domloader.js</code> 的前端加载小工具，如果需要使用子目录方式访问的话，需要设置一个 <code>domloader.root</code> 的参数<a href="https://www.anspoon.com/domloader-3444.html" target="_blank" rel="noopener">参考文章《HTML模板加载对象，简化并优化前端开发的小工具domloader》</a>。 <code>config/init.html</code> 和 <code>js/domloader.js</code> 里都有 <code>domloader.root</code> ,值全部修改为 <code>http://localhost/bootstrap4cn/</code> （其实只修改init.html里的即可）， 再次访问<code>http://localhost/bootstrap4cn/</code>，成功访问首页。高兴的点击一下【让我们开始吧】按钮，嗯？又来？一片空白？继续调查，访问 <code>http://localhost/bootstrap4cn/pages/getting_started.html</code> 页面时， <code>http://localhost/config/pre.html?v=1586325297234</code> 找不到。已经改过 <code>domloader.root</code> 了啊，怎么还有这种问题呢。打开 <code>pages/getting_started.html</code> 文件，发现代码 <code>domloader.preload(&#39;../config/pre.html&#39;);</code> 。和 <code>init.html</code> 里的root值一结合，嗯，完美干掉了的子目录 <code>bootstrap4cn</code> 。直接修改 <code>domloader.preload(&#39;../config/pre.html&#39;);</code> 为 <code>domloader.preload(&#39;config/pre.html&#39;);</code> 。刷新浏览器，开始页面也出来了。一顿展开， <code>pages</code> 目录下的文件都做相同的修改。随意进入了几个页面，好像没有其他问题了。</p>
-<p>如果不使用子目录方式访问的话，是不需要做任何修改的。</p>
-<p>以上</p>
+                <h2 id="vba的几个小memo"><a href="#vba的几个小memo" class="headerlink" title="vba的几个小memo"></a>vba的几个小memo</h2><p>帮同事写了一个vba小工具。需求是将某目录下的一些excel表格的内容（CRUD），按照某个维度（画面ID）进行合并，输出在一个新excle表格中。用到了几个vba的小知识点，memo一下。</p>
+<ol>
+<li>文件夹下所有文件取得</li>
+<li>字典（用于记录合并key的map）</li>
+<li>文本文件输出（记录日志）</li>
+</ol>
+<pre class="line-numbers language-vb"><code class="language-vb">
+' vba源代码
+Sub update_Click()
+    ' 定义变量
+    Dim myFso As Object
+    Dim myFiles
+    Dim sh As Variant
+    Dim strWorkPath As String
+    Dim strWorkBook As String
+    Dim shtWork As Worksheet
+    Dim strMyBook As String
+    Dim lngRow As Long
+    Dim lngNewRow As Long
+    Dim lngLoopRow As Long
+    Dim lngLoopCol As Long
+    Dim strSheet As String
+    Dim strCRUD As String
+    Dim i As Integer
+    Dim flgFound As Boolean
+    Dim dict As Object
+
+    Application.ScreenUpdating = False
+
+    If MsgBox("确定要更新一览的内容吗？", vbYesNo) = vbNo Then
+        Exit Sub
+    End If
+
+    lngNewRow = 2
+    strMyBook = ActiveWorkbook.Name
+
+    ' 删除表格中第四行所有内容
+    Rows(4 & ":" & Cells(4, 2).End(xlDown).Row).Delete shift:=xlUp
+    ' 清楚第三行内容，保留格式
+    Rows(3).ClearContents
+    ' 取得当前目录下文件一览
+    Set myFso = CreateObject("Scripting.FileSystemObject")
+    Set myFiles = myFso.GetFolder(ActiveWorkbook.Path).Files
+    ' 以输出模式打开日志文件log.txt
+    Open ActiveWorkbook.Path & "\log.txt" For Output As #1
+    ' 创建字典对象
+    Set dict = CreateObject("Scripting.Dictionary")
+
+    For Each sh In myFiles
+        If InStr(sh.Name, "CRUD(") <> 0 Then
+            strWorkPath = sh.Path
+            strWorkBook = sh.Name
+            Application.StatusBar =  strWorkBook & "文件处理中..."
+            ' 只读方式打开文件
+            Workbooks.Open Filename:=strWorkPath, ReadOnly:=True, UpdateLinks:=0
+            Set shtWork = Workbooks(strMyBook).Sheets(1)
+            With Workbooks(strWorkBook).Sheets("CRUD")
+                ' 显示所有隐藏列
+                .Columns.Hidden = False
+                lngLoopCol = 6
+                Do Until .Cells(4, lngLoopCol) = ""
+                    flgFound = False
+                    ' 判断字典中key是否存在
+                    If dict.exists(.Cells(5, lngLoopCol).Value) Then
+                        flgFound = True
+                        ' 取出字典中的值
+                        lngRow = dict.Item(.Cells(5, lngLoopCol).Value)
+                    End If
+
+                    If Not flgFound Then
+                        lngNewRow = lngNewRow + 1
+                        lngRow = lngNewRow
+                        If .Cells(5, lngLoopCol) = "" Then
+                            .Cells(5, lngLoopCol) = "UNKNOWN" & (lngRow - 2)
+                        End If
+                        ' 追加字典中的项目，key尽量用字符串，不要用对象
+                        dict.Add .Cells(5, lngLoopCol).Value, lngRow
+                        shtWork.Rows(lngRow).Insert CopyOrigin:=xlFormatFromRightOrBelow
+                        ' 序号
+                        shtWork.Cells(lngRow, 2) = lngRow - 2
+                        ' 画面ID
+                        shtWork.Cells(lngRow, 3) = .Cells(5, lngLoopCol)
+                        ' 画面名
+                        shtWork.Cells(lngRow, 4) = .Cells(4, lngLoopCol)
+                    End If
+                     ' CRUD合并，去重
+                    lngLoopRow = 7
+                    Do Until .Cells(lngLoopRow, 3) = ""
+                        ' 向日志文件中写入内容
+                        Print #1, strWorkBook & "->" & .Cells(5, lngLoopCol) & .Cells(lngLoopRow, 5) & "." & .Cells(lngLoopRow, 3) & " : " & .Cells(lngLoopRow, lngLoopCol)
+                        If .Cells(lngLoopRow, lngLoopCol) <> "" Then
+                            strCRUD = .Cells(lngLoopRow, lngLoopCol)
+                            For i = 1 To Len(strCRUD)
+                                If InStr(shtWork.Cells(lngRow, 5), Mid(strCRUD, i, 1)) = 0 Then
+                                    shtWork.Cells(lngRow, 5) = shtWork.Cells(lngRow, 5) & Mid(strCRUD, i, 1)
+                                End If
+                            Next
+                            ' 表名
+                            shtWork.Cells(lngRow, 6) = shtWork.Cells(lngRow, 6) & .Cells(lngLoopRow, 5) & "." & .Cells(lngLoopRow, 3) & "(" & .Cells(lngLoopRow, lngLoopCol) & ")" & Chr(10)
+                        End If
+
+                        lngLoopRow = lngLoopRow + 1
+                    Loop
+
+                    ' CRUD顺序整理
+                    If shtWork.Cells(lngRow, 5) <> "" Then
+                        strCRUD = ""
+                        If InStr(shtWork.Cells(lngRow, 5), "C") Then
+                            strCRUD = strCRUD & "C"
+                        End If
+                        If InStr(shtWork.Cells(lngRow, 5), "R") Then
+                            strCRUD = strCRUD & "R"
+                        End If
+                        If InStr(shtWork.Cells(lngRow, 5), "U") Then
+                            strCRUD = strCRUD & "U"
+                        End If
+                        If InStr(shtWork.Cells(lngRow, 5), "D") Then
+                            strCRUD = strCRUD & "D"
+                        End If
+                        shtWork.Cells(lngRow, 5) = strCRUD
+                    End If
+
+                    lngLoopCol = lngLoopCol + 1
+                Loop
+            End With
+            ' 关闭文件，不保存
+            Workbooks(strWorkBook).Close saveChanges:=False
+        End If
+    Next
+    ' 关闭日志文件
+    Close #1
+    Application.StatusBar = False
+    Set myFso = Nothing
+    Application.ScreenUpdating = True
+End Sub
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>补充：同时打开多个文件进行处理数据时，要明确指出文件对象，不要相信什么默认当前文件对象。</p>
 
             </div>
             <hr/>
@@ -479,7 +611,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://colbertwong.github.io/2020/04/08-1051.html">https://colbertwong.github.io/2020/04/08-1051.html</a>
+                    <a href="https://colbertwong.github.io/2020/04/22-1046.html">https://colbertwong.github.io/2020/04/22-1046.html</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -517,12 +649,8 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/%E5%89%8D%E7%AB%AF/">
-                                    <span class="chip bg-color">前端</span>
-                                </a>
-                            
-                                <a href="/tags/bootstrap4/">
-                                    <span class="chip bg-color">bootstrap4</span>
+                                <a href="/tags/vba/">
+                                    <span class="chip bg-color">vba</span>
                                 </a>
                             
                         </div>
@@ -568,7 +696,7 @@
         repo: 'colbertwong-gitalks',
         owner: 'colbertwong',
         admin: "colbertwong",
-        id: '2020-04-08T10-51-03',
+        id: '2020-04-22T10-46-19',
         distractionFreeMode: false  // Facebook-like distraction free mode
     });
 
@@ -589,36 +717,91 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2020/04/12-1026.html">
+                <a href="/2020/04/22-1046.html">
                     <div class="card-image">
                         
                         
-                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAAEsCAMAAABOo35HAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAC9UExURVlZWdPT07KysmRkZIWFhfT09JmZmWZmZm9vb39/fxkZGUxMTDMzM3p6epCQkKamppubm729venp6cjIyN7e3tbW1s/Pz8LCwnx8fLS0tFZWVoiIiI+Pj6GhoeTk5Glpabu7u93d3evr66CgoJSUlKqqqsnJyeDg4Hd3d8PDw+Xl5bi4uNHR0dvb26Ojo6urq+fn51hYWDg4OCgoKHBwcK2traenp0FBQe7u7vHx8U5OTre3t8zMzHV1df///7GrnpQAAAA/dFJOU///////////////////////////////////////////////////////////////////////////////////AI4mfBcAAAUGSURBVHja7NoJb6M4GMZxY0NCD64kve/pMZ2d3Z297+X7f6zFNmBAMUXa6URl/q9UJSWPUPzrizFWRUlNLgEBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYYIEFAVhggQUWWGBBABZYYIEFFlgQgAUWWGCBBRYEYIEFFlhggQUBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYn6cCIcRXgvX/h9qcIVBqDdbEM8RCxGCB9QqXYRwHYDHBgwXWl8eKZKiESHI3Ba1kWs3fKixcaJUl1YyeBm7Ocq+yLItUiVBGnXxenSHJolIKEcwHq6ikbOX1YGVzQCTN8LPmSLreghUl9sN4Uw7yajMrLC0TZ1ImzqY6FEop0+pIaEN5HaoOxVuwEqFyc4I46uSlzOLqgxlh6UaR9l3VYWl9Fdoxb1Q90KJtu41pwwFW/WHhTtW8i7TafLCqRsk6bsGw63L9qurXRmuIlbT9lDQnlXU+nBFW1Q2qnZbDprWa2tjR90LZFqx1/+Td/HpGWLlrLDvIwTcx6dQ1Vrntbig68cDms3JwbA5Y1azs1ger6sNV/bbIw1jU81MvNAGrl58RVn8ozW+btF08iGFoAlYvP3csfVur1gJBEIA1uBmue5dhZDOyO2epbmgCVi8/I6x0MMHH9pjsTfBhNzQBq5uPZoQlB0uH3DZG4EZqQ26fL3sZq5uf09Ih6qw3i/pm6BZO0qZX7rrUS68Xsbr5ZE4rePMk08pk9aUZugfqppvs6AM1Acvlo/StP+6EbW06z8hJqxbYp2BZPQUnFsLsKuhQdaHqn5ewbF7KXIn0jWO5MqOQ7RaNLPtbNMmmhimj0GUmYLl8Gs0Lq4wyPbTu1l2QKqHSouzs3OlDIslW5SQsnY/NXmFplyNvEuuLV/Tau9BzwiraDUSwXmysztYWWNtL1psXeumgIrDGaqXvBfUuvtqUYI3V2t1wk1e2msFluJJm6zDJXv/fIfjPP7DAAgsssCiwwAILLLDAosACCyywwAKLAgsssMACC6zt9fDz/v75tyOB+98PD2+ORgKffjw4OP1uJPDxl+Xy8v1I4MPF3t7VNyOB4/vF4uzdzrG+39f1kz/w66Guv/yBvw90KX/gZKkr8Qf+2dOV+gNHC12/7RxrabD2/a31bLAO/a11YbAO/K21MFhLf2s9Gqw9f2vdGqzFu11jnVusE2/gxmI9eQOnFuvYG7i0WH7uK4t15w2cWazrXWP9a7H8f/bQYvm/6IPF+sF/pVssf19Ii/WH/0K2WH/uGuvEWC39gSdj9Twy+Rqri5EZx1gt/IE7Y/XoD1wbq9vd3w1PlufnD2OBp+ebm/uxwPHF6emnscDR4vLy41jg7vHq6sNY4Pr27OyYdRaLUrDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssL6u+k+AAQCR9eHtLKvLfwAAAABJRU5ErkJggg==" data-original="/medias/featureimages/5.jpg" class="responsive-img" alt="python3 memo 0411AM">
+                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAAEsCAMAAABOo35HAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAC9UExURVlZWdPT07KysmRkZIWFhfT09JmZmWZmZm9vb39/fxkZGUxMTDMzM3p6epCQkKamppubm729venp6cjIyN7e3tbW1s/Pz8LCwnx8fLS0tFZWVoiIiI+Pj6GhoeTk5Glpabu7u93d3evr66CgoJSUlKqqqsnJyeDg4Hd3d8PDw+Xl5bi4uNHR0dvb26Ojo6urq+fn51hYWDg4OCgoKHBwcK2traenp0FBQe7u7vHx8U5OTre3t8zMzHV1df///7GrnpQAAAA/dFJOU///////////////////////////////////////////////////////////////////////////////////AI4mfBcAAAUGSURBVHja7NoJb6M4GMZxY0NCD64kve/pMZ2d3Z297+X7f6zFNmBAMUXa6URl/q9UJSWPUPzrizFWRUlNLgEBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYYIEFAVhggQUWWGBBABZYYIEFFlgQgAUWWGCBBRYEYIEFFlhggQUBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYn6cCIcRXgvX/h9qcIVBqDdbEM8RCxGCB9QqXYRwHYDHBgwXWl8eKZKiESHI3Ba1kWs3fKixcaJUl1YyeBm7Ocq+yLItUiVBGnXxenSHJolIKEcwHq6ikbOX1YGVzQCTN8LPmSLreghUl9sN4Uw7yajMrLC0TZ1ImzqY6FEop0+pIaEN5HaoOxVuwEqFyc4I46uSlzOLqgxlh6UaR9l3VYWl9Fdoxb1Q90KJtu41pwwFW/WHhTtW8i7TafLCqRsk6bsGw63L9qurXRmuIlbT9lDQnlXU+nBFW1Q2qnZbDprWa2tjR90LZFqx1/+Td/HpGWLlrLDvIwTcx6dQ1Vrntbig68cDms3JwbA5Y1azs1ger6sNV/bbIw1jU81MvNAGrl58RVn8ozW+btF08iGFoAlYvP3csfVur1gJBEIA1uBmue5dhZDOyO2epbmgCVi8/I6x0MMHH9pjsTfBhNzQBq5uPZoQlB0uH3DZG4EZqQ26fL3sZq5uf09Ih6qw3i/pm6BZO0qZX7rrUS68Xsbr5ZE4rePMk08pk9aUZugfqppvs6AM1Acvlo/StP+6EbW06z8hJqxbYp2BZPQUnFsLsKuhQdaHqn5ewbF7KXIn0jWO5MqOQ7RaNLPtbNMmmhimj0GUmYLl8Gs0Lq4wyPbTu1l2QKqHSouzs3OlDIslW5SQsnY/NXmFplyNvEuuLV/Tau9BzwiraDUSwXmysztYWWNtL1psXeumgIrDGaqXvBfUuvtqUYI3V2t1wk1e2msFluJJm6zDJXv/fIfjPP7DAAgsssCiwwAILLLDAosACCyywwAKLAgsssMACC6zt9fDz/v75tyOB+98PD2+ORgKffjw4OP1uJPDxl+Xy8v1I4MPF3t7VNyOB4/vF4uzdzrG+39f1kz/w66Guv/yBvw90KX/gZKkr8Qf+2dOV+gNHC12/7RxrabD2/a31bLAO/a11YbAO/K21MFhLf2s9Gqw9f2vdGqzFu11jnVusE2/gxmI9eQOnFuvYG7i0WH7uK4t15w2cWazrXWP9a7H8f/bQYvm/6IPF+sF/pVssf19Ii/WH/0K2WH/uGuvEWC39gSdj9Twy+Rqri5EZx1gt/IE7Y/XoD1wbq9vd3w1PlufnD2OBp+ebm/uxwPHF6emnscDR4vLy41jg7vHq6sNY4Pr27OyYdRaLUrDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssL6u+k+AAQCR9eHtLKvLfwAAAABJRU5ErkJggg==" data-original="/medias/featureimages/16.jpg" class="responsive-img" alt="vba的几个小memo">
                         
-                        <span class="card-title">python3 memo 0411AM</span>
+                        <span class="card-title">vba的几个小memo</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            python3 memo 0411AMpython3的随堂笔记，这是第一部分。
+                            vba的几个小memo帮同事写了一个vba小工具。需求是将某目录下的一些excel表格的内容（CRUD），按照某个维度（画面ID）进行合并，输出在一个新excle表格中。用到了几个vba的小知识点，memo一下。
 
-import keyword
-
-# 几个特别的关键字：False, True, elif
-print(keyword.kwlist)
-
-# 强类型: 不能自动
+文件夹下所有文件取得
+字
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-04-12
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-04-22
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E6%8A%80%E6%9C%AF/" class="post-category">
+                                    技术
+                                </a>
+                            
+                            
                         </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/vba/">
+                        <span class="chip bg-color">vba</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2020/04/20-2011.html">
+                    <div class="card-image">
+                        
+                        
+                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAAEsCAMAAABOo35HAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAC9UExURVlZWdPT07KysmRkZIWFhfT09JmZmWZmZm9vb39/fxkZGUxMTDMzM3p6epCQkKamppubm729venp6cjIyN7e3tbW1s/Pz8LCwnx8fLS0tFZWVoiIiI+Pj6GhoeTk5Glpabu7u93d3evr66CgoJSUlKqqqsnJyeDg4Hd3d8PDw+Xl5bi4uNHR0dvb26Ojo6urq+fn51hYWDg4OCgoKHBwcK2traenp0FBQe7u7vHx8U5OTre3t8zMzHV1df///7GrnpQAAAA/dFJOU///////////////////////////////////////////////////////////////////////////////////AI4mfBcAAAUGSURBVHja7NoJb6M4GMZxY0NCD64kve/pMZ2d3Z297+X7f6zFNmBAMUXa6URl/q9UJSWPUPzrizFWRUlNLgEBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYYIEFAVhggQUWWGBBABZYYIEFFlgQgAUWWGCBBRYEYIEFFlhggQUBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYn6cCIcRXgvX/h9qcIVBqDdbEM8RCxGCB9QqXYRwHYDHBgwXWl8eKZKiESHI3Ba1kWs3fKixcaJUl1YyeBm7Ocq+yLItUiVBGnXxenSHJolIKEcwHq6ikbOX1YGVzQCTN8LPmSLreghUl9sN4Uw7yajMrLC0TZ1ImzqY6FEop0+pIaEN5HaoOxVuwEqFyc4I46uSlzOLqgxlh6UaR9l3VYWl9Fdoxb1Q90KJtu41pwwFW/WHhTtW8i7TafLCqRsk6bsGw63L9qurXRmuIlbT9lDQnlXU+nBFW1Q2qnZbDprWa2tjR90LZFqx1/+Td/HpGWLlrLDvIwTcx6dQ1Vrntbig68cDms3JwbA5Y1azs1ger6sNV/bbIw1jU81MvNAGrl58RVn8ozW+btF08iGFoAlYvP3csfVur1gJBEIA1uBmue5dhZDOyO2epbmgCVi8/I6x0MMHH9pjsTfBhNzQBq5uPZoQlB0uH3DZG4EZqQ26fL3sZq5uf09Ih6qw3i/pm6BZO0qZX7rrUS68Xsbr5ZE4rePMk08pk9aUZugfqppvs6AM1Acvlo/StP+6EbW06z8hJqxbYp2BZPQUnFsLsKuhQdaHqn5ewbF7KXIn0jWO5MqOQ7RaNLPtbNMmmhimj0GUmYLl8Gs0Lq4wyPbTu1l2QKqHSouzs3OlDIslW5SQsnY/NXmFplyNvEuuLV/Tau9BzwiraDUSwXmysztYWWNtL1psXeumgIrDGaqXvBfUuvtqUYI3V2t1wk1e2msFluJJm6zDJXv/fIfjPP7DAAgsssCiwwAILLLDAosACCyywwAKLAgsssMACC6zt9fDz/v75tyOB+98PD2+ORgKffjw4OP1uJPDxl+Xy8v1I4MPF3t7VNyOB4/vF4uzdzrG+39f1kz/w66Guv/yBvw90KX/gZKkr8Qf+2dOV+gNHC12/7RxrabD2/a31bLAO/a11YbAO/K21MFhLf2s9Gqw9f2vdGqzFu11jnVusE2/gxmI9eQOnFuvYG7i0WH7uK4t15w2cWazrXWP9a7H8f/bQYvm/6IPF+sF/pVssf19Ii/WH/0K2WH/uGuvEWC39gSdj9Twy+Rqri5EZx1gt/IE7Y/XoD1wbq9vd3w1PlufnD2OBp+ebm/uxwPHF6emnscDR4vLy41jg7vHq6sNY4Pr27OyYdRaLUrDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssL6u+k+AAQCR9eHtLKvLfwAAAABJRU5ErkJggg==" data-original="/medias/featureimages/21.jpg" class="responsive-img" alt="python3 memo 0418PM">
+                        
+                        <span class="card-title">python3 memo 0418PM</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            python3 memo 0418PMpython3的随堂笔记，这是最后一部分。
+
+# 异常
+try:
+    print('A')
+    a = 1 / 2
+    print('B')
+except: # 捕获异常
+    print
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-04-20
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -636,57 +819,6 @@ print(keyword.kwlist)
                     
                     <a href="/tags/python3/">
                         <span class="chip bg-color">python3</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/2020/04/08-0952.html">
-                    <div class="card-image">
-                        
-                        
-                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAAEsCAMAAABOo35HAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAC9UExURVlZWdPT07KysmRkZIWFhfT09JmZmWZmZm9vb39/fxkZGUxMTDMzM3p6epCQkKamppubm729venp6cjIyN7e3tbW1s/Pz8LCwnx8fLS0tFZWVoiIiI+Pj6GhoeTk5Glpabu7u93d3evr66CgoJSUlKqqqsnJyeDg4Hd3d8PDw+Xl5bi4uNHR0dvb26Ojo6urq+fn51hYWDg4OCgoKHBwcK2traenp0FBQe7u7vHx8U5OTre3t8zMzHV1df///7GrnpQAAAA/dFJOU///////////////////////////////////////////////////////////////////////////////////AI4mfBcAAAUGSURBVHja7NoJb6M4GMZxY0NCD64kve/pMZ2d3Z297+X7f6zFNmBAMUXa6URl/q9UJSWPUPzrizFWRUlNLgEBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYYIEFAVhggQUWWGBBABZYYIEFFlgQgAUWWGCBBRYEYIEFFlhggQUBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYn6cCIcRXgvX/h9qcIVBqDdbEM8RCxGCB9QqXYRwHYDHBgwXWl8eKZKiESHI3Ba1kWs3fKixcaJUl1YyeBm7Ocq+yLItUiVBGnXxenSHJolIKEcwHq6ikbOX1YGVzQCTN8LPmSLreghUl9sN4Uw7yajMrLC0TZ1ImzqY6FEop0+pIaEN5HaoOxVuwEqFyc4I46uSlzOLqgxlh6UaR9l3VYWl9Fdoxb1Q90KJtu41pwwFW/WHhTtW8i7TafLCqRsk6bsGw63L9qurXRmuIlbT9lDQnlXU+nBFW1Q2qnZbDprWa2tjR90LZFqx1/+Td/HpGWLlrLDvIwTcx6dQ1Vrntbig68cDms3JwbA5Y1azs1ger6sNV/bbIw1jU81MvNAGrl58RVn8ozW+btF08iGFoAlYvP3csfVur1gJBEIA1uBmue5dhZDOyO2epbmgCVi8/I6x0MMHH9pjsTfBhNzQBq5uPZoQlB0uH3DZG4EZqQ26fL3sZq5uf09Ih6qw3i/pm6BZO0qZX7rrUS68Xsbr5ZE4rePMk08pk9aUZugfqppvs6AM1Acvlo/StP+6EbW06z8hJqxbYp2BZPQUnFsLsKuhQdaHqn5ewbF7KXIn0jWO5MqOQ7RaNLPtbNMmmhimj0GUmYLl8Gs0Lq4wyPbTu1l2QKqHSouzs3OlDIslW5SQsnY/NXmFplyNvEuuLV/Tau9BzwiraDUSwXmysztYWWNtL1psXeumgIrDGaqXvBfUuvtqUYI3V2t1wk1e2msFluJJm6zDJXv/fIfjPP7DAAgsssCiwwAILLLDAosACCyywwAKLAgsssMACC6zt9fDz/v75tyOB+98PD2+ORgKffjw4OP1uJPDxl+Xy8v1I4MPF3t7VNyOB4/vF4uzdzrG+39f1kz/w66Guv/yBvw90KX/gZKkr8Qf+2dOV+gNHC12/7RxrabD2/a31bLAO/a11YbAO/K21MFhLf2s9Gqw9f2vdGqzFu11jnVusE2/gxmI9eQOnFuvYG7i0WH7uK4t15w2cWazrXWP9a7H8f/bQYvm/6IPF+sF/pVssf19Ii/WH/0K2WH/uGuvEWC39gSdj9Twy+Rqri5EZx1gt/IE7Y/XoD1wbq9vd3w1PlufnD2OBp+ebm/uxwPHF6emnscDR4vLy41jg7vHq6sNY4Pr27OyYdRaLUrDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssL6u+k+AAQCR9eHtLKvLfwAAAABJRU5ErkJggg==" data-original="/medias/featureimages/7.jpg" class="responsive-img" alt="日常试用hexo写作流程">
-                        
-                        <span class="card-title">日常试用hexo写作流程</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            日常试用hexo写作流程最近有些忙，一个月没写博客了。今天突然想写一下，结果忘了hexo怎么用了。我的天啊！太可怕了！这才几天啊，我这是个假脑子吗？其实已经四十多了，记不住也正常吧。好记性不如烂笔头，赶快写下来吧。
-
-打开命令行窗口，进入h
-                        
-                    </div>
-                    <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-04-08
-                            </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/%E6%8A%80%E6%9C%AF/" class="post-category">
-                                    技术
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/hexo/">
-                        <span class="chip bg-color">hexo</span>
                     </a>
                     
                 </div>
