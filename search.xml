@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>win10休眠后自动唤醒的解除</title>
+      <link href="/2020/06/05-0954.html"/>
+      <url>/2020/06/05-0954.html</url>
+      
+        <content type="html"><![CDATA[<h2 id="win10休眠后自动唤醒的解除"><a href="#win10休眠后自动唤醒的解除" class="headerlink" title="win10休眠后自动唤醒的解除"></a>win10休眠后自动唤醒的解除</h2><p>最近换了新的开发机，系统是 <code>win10 1909</code> 。和往常一样，修改电源设置，打开关机菜单的休眠选项。下班后，休眠机器。第二天上班，嗯？机器怎么是开的？检查系统日志，发现了 <code>Power-Troubleshooter</code> 的一条日志中，记录了休眠解除的信息。但是解除的原因不明。</p><p>百度了一圈，找到解决方法：控制面板-&gt;电源选项-&gt;更改计划设置-&gt;更改高级电源设置-&gt;睡眠-&gt;允许使用唤醒定时器-&gt;子选项全部设置为禁用。点击确定，打完收工。</p><p>以上</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 技术 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> win10 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>vba的几个小memo</title>
       <link href="/2020/04/22-1046.html"/>
       <url>/2020/04/22-1046.html</url>
